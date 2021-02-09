@@ -1,0 +1,86 @@
+/ : 根目录
+linux是树形结构的文件形式
+mkdir xxx : 创建目录
+mkdir -p dir1/dir2/dir3
+rmdir xxx : 删除空目录
+tree : 显示当前文件的树形结构
+  sudo apt install tree
+
+创建文件：
+1.touch xxx （最常用）
+2.echo "xxxx"
+  echo "xxxx" > xxx
+  echo "hello world" > file1
+3.vim xxx
+4.cat xxx
+  ctrl+d退出
+
+阅读文件：
+cat xxx
+head -n 20 xxx : 显示文件前20行
+tail -n 20 xxx : 从后往前显示
+more xxx : 向下查看
+less xxx : 可以上下查看
+
+rm : 删除文件或文件夹
+  rm -r xxx ：删除非空文件夹
+  rm xxx 
+  rm -i xxx : 带有提示信息的删除（提示信息用-i）
+cp : 拷贝
+  cp file1 file2 拷贝文件到文件
+  cp file1 dir1/ 拷贝文件到目录
+  cp -r dir1/ dir2 拷贝目录到目录
+  cp /home/test.cc . 拷贝文件到当前目录（.表示当前目录）
+mv : 移动（改名字)
+  mv file1 file2 : 把file1里的内容移到flie2,file1变为空
+
+ls : 显示当前目录
+ls .. : 显示上一级目录
+以.开头的文件为隐藏文件，ls 不显示，ls -a 可显示隐藏文件
+
+linux下一切皆文件
+
+ll下显示的详细信息：
+  如 d rwx rwx r-x 当前用户 组用户 其他用户
+  -普通文件 d目录文件 l链接文件 b块文件 c字符设备文件 s套接字文件 p管理文件
+  rwx- : r读 w写 x执行 -没有权限
+  
+  后面的数字代表硬链接数
+  
+chmod : 更改权限命令
+  八进制法：
+  chmod 421 file1
+  
+find : 查找文件
+  find 起始目录 查找表达式
+  find . -name file1 : 在当前目录查找file1
+  find /home/teach/ -name file1
+  find . -name "file*" : 通配符模糊查找
+    “file?"
+    "file[1-9]"
+    
+其他命令详见思维导图
+
+
+输入输出：
+  stdin 标准输入
+  stdout 标准输出
+  stderr 标准错误输出
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
