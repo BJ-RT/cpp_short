@@ -1,1 +1,34 @@
+linux 文件
+bin：二进制文件
+etc：配置文件
+lib：库
+proc：进程
+
+linux 命令
+man: 查询命令用法
+cd : 切换目录
+ls :
+pwd: 打印当前路径
+绝对路径：详细
+相对路径：简略
+cd - :回到上几次目录
+cd .. :回到上一级目录
+  
+用户相关
+sudo useradd xxx : 创建用户（没有home目录，没有密码，没有系统shell的三无产品）
+sudo useradd -m xxx -s /bin/bash : 创建有home的用户并指定shell类型
+cat : 查看文件内容
+  如：cat /etc/passwd
+  
+xshell 设置默热连接
+
+sudo passwd xxx : 配置密码
+su xxx : 切换用户
+su : 切换root用户
+exit: 退出用户
+sudo userdel xxx : 删除用户
+sudo userdel -r xxx : 完全删除用户
+history : 显示输入过的命令
+
+
 
