@@ -68,8 +68,11 @@ find : 查找文件
   stderr 标准错误输出
   echo "hello world" > file1
     追加模式：echo "xxx" >> file1
-
-
+grep : 文件内容查找（正则表达式）
+  详见思维导图
+  
+vim 操作：
+见思维导图
 
 
 
