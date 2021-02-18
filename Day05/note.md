@@ -102,8 +102,88 @@ inline函数要简单，最好不要加while/for
 throw 表达式
 try-catch语句块
 ```
+## C和C++风格字符串  
+C:  
+```
+    //C语言定义字符串，字符数组
+    //C语言是以'\0'结尾的
+    char str1[] = "hello";
+    char str2[] = "world";
 
+    str1[0] = 'H'; //改变字符串内容
+    printf("str1 = %s\n", str1);
 
+    //str1 = nullptr;error字符数组只能改变某个内容，不能改变本身
+
+    //C语言获取字符串长度的方式
+    size_t len1 = sizeof(str1);
+    size_t len2 = sizeof(str2);
+
+    printf("len1 = %lu\n", len1);
+    printf("len2 = %lu\n", len2);
+
+    const char *pstr = "12345"; //指针方式，默认为const
+    printf("pstr = %s\n", pstr);
+    
+    pstr = "hubeiwuhan";
+    printf("pstr = %s\n", pstr);
+    //pstr[0] = 'H';error指针方式本身可以改变，但内容不能改变，因为是const char*
+    cout << sizeof(pstr) << endl; //普通方式两种方式都可计算长度
+    cout << strlen(pstr) << endl; //指针方式只能用strlen计算长度
+
+    //C语言拼接字符串
+    size_t len = len1 + len2 - 1;
+    char *pstr1 = static_cast<char *>(malloc(len));
+    memset(pstr1, 0, len);
+    strcpy(pstr1, str1); //拷贝
+    strcat(pstr1, str2); //拼接
+
+    printf("pstr1 = %s\n", pstr1);
+
+    free(pstr1);
+```
+C++：  
+```
+    //1、C风格字符串可以转化为C++风格字符串
+    //     C++    C
+    string s1 = "hello";
+    string s2 = "world";
+    
+    //拼接字符串
+    string s3 = s1 + s2;
+    cout << "s1 = " << s1 << endl
+         << "s2 = " << s2 << endl
+         << "s3 = " << s3 << endl;
+
+    cout << endl;
+
+    //2、C++风格字符串转化为C风格字符串
+    const char *pstr = s3.c_str();
+    cout << "pstr = " << pstr << endl;
+    
+    //3、获取C++风格字符串长度
+    size_t len1 = s3.size();
+    size_t len2 = s3.length();
+    cout << "len1 = " << len1 << endl
+         << "len2 = " << len2 << endl;
+
+    //4、遍历C++风格字符串
+    for(size_t index = 0; index != s3.size(); ++index)
+    {
+        cout << s3[index] << " ";
+    }
+    cout << endl;
+
+    //5、C++风格字符串的拼接
+    string s4 = s3 + "wuhan";
+    cout << "s4 = " << s4 << endl;
+    string s5 = s4 + 'A';
+    cout << "s5 = " << s5 << endl;
+
+    s5.append(s1); //追加
+    cout << "s5 = " << s5 << endl;
+```
+## 程序内存分配方式  
 
 
 
