@@ -74,7 +74,17 @@ int main()
     pc = nullptr;
 
 ```
-
+## GDB调试  
+sudo apt install gdb  
+g++ Computer.cc -o test -g  
+gdb test  
+l：列出代码（l 行数）list    
+r：运行run  
+n：退出运行  
+b + 函数名/行号：断点break  
+info b: 显示断点  
+s: 进入函数中step  
+详见思维导图  
 
 
 
