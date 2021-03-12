@@ -111,6 +111,109 @@ Computer &Computer::operator=(const Computer &rhs)
     return *this;
 }
 ```
+### 赋值运算符函数的返回引用符号可以去掉吗？  
+不能，否则在执行return语句的时候，会符合拷贝构造函数的调用时机3，又会进行一次拷贝操作  
+### 赋值运算符函数的返回值类型可以不是类类型(Point/Computer)吗?  
+不能，  
+# 特殊数据成员的初始化  
+4种特殊函数：构造函数、析构函数、拷贝构造函数、赋值运算符函数  
+4种特殊数据成员：常量成员、引用成员、类对象成员、静态成员  
+## 常量数据成员
+```
+private:
+    const int _ix; //常量数据成员（常量在定义的时候必须进行初始化）
+    const int _iy;
+```
+```
+    Point(int ix = 0, int iy = 0)
+    : _ix(ix) //对常量数据成员进行初始化
+    , _iy(iy)
+
+```
+```
+    //const版本的成员函数与非const版本的成员函数可以同时存在（可以重载）
+    void print();
+    void print() const; //建议先定义const版本的
+```
+```
+Computer com1("lenovo", 5500); //非const版本的调用非const成员函数
+com1.print();
+
+const Computer com2("apple", 9500); //const版本的调用const成员函数
+com2.print();
+                                //非const版本的可以调用const版本的成员函数，反之不行
+```
+## 引用数据成员  
+```
+    int &_ref; //引用数据成员必须绑定实体，在内存中占一个指针大小的空间（8字节）
+```
+```
+    , _ref(_ix) //引用数据成员绑定实体
+```
+空类占用一个字节，来区分不同对象  
+## 类对象成员  
+```
+class Line
+{
+public:
+    Line(int x1, int y1, int x2, int y2)
+    : _pt1(x1, y1) //类对象成员初始化
+    , _pt2(x2, y2)
+    {}
+```
+```
+private:
+    Point _pt1; //类对象成员必须进行初始化
+    Point _pt2;
+};
+```
+## 静态数据成员  
+静态数据成员不受private、protect等的限制，不占内存，可在类外访问，被该类的所有对象共享  
+```
+private:
+    char *_brand;
+    float _price;
+    static float _totalPrice; //必须进行初始化
+```
+```
+Computer::Computer(const char *brand, float price)
+: _brand(new char[strlen(brand) + 1]())
+, _price(price)
+, _totalPrice(0) //静态数据成员不能在初始化列表初始化
+```
+```
+using std::endl;
+float Computer::_totalPrice = 0.0; //在类外初始化（多文件时在实现文件.cc中初始化）
+Computer::Computer(const char *brand, float price)
+```
+静态成员函数的定义：  
+```
+    static void printTotalPrice(); //声明
+```
+```
+void Computer::printTotalPrice() //实现的时候不加static
+{
+
+}
+```
+静态成员函数无隐含的this指针，因为静态成员是全局的东西，被全体成员共享    
+```
+void Computer::printTotalPrice()
+{
+    _price = 100; //error, 静态成员函数不能访问非静态的数据成员，反之可以
+    print(); //error, 也不能访问非静态的成员函数，反之可以
+}
+```
+静态成员函数的调用：  
+```
+void Computer::printTotalPrice()
+{
+    cout << "静态成员函数 = " << _totalPrice << endl;
+}
+```
+```
+    Computer::printTotalPrice(); //静态成员函数可以使用类名加作用域的方式调用
+```
 
 
 
@@ -125,5 +228,10 @@ Computer &Computer::operator=(const Computer &rhs)
 
 
 
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
