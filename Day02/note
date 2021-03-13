@@ -14,6 +14,9 @@ tree : 显示当前文件的树形结构
 3.vim xxx
 4.cat xxx
   ctrl+d退出
+5.小文件的传输：
+  sz test.cc拷贝到windows
+  rz test.cc拷贝到linux
 
 阅读文件：
 cat xxx（常用）
