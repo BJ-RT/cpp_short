@@ -113,15 +113,205 @@ int main()
     return 0;
 }
 ```
+# 四、new与delete表达式  
+## new表达式工作步骤：  
+1、调用名为operator new的标准库函数，分配足够大的原始的未类型化的内存，以保存指定类型的一个对象  
+2、运行该类型的一个构造函数初始化对象  
+3、返回指向新分配并构造的构造函数对象的指针  
+## delete表达式工作步骤：  
+1、调用析构函数，回收对象中数据成员所申请的资源  
+2、调用名为operator delete的标准库函数释放该对象所用的内存  
+Student.cc:  
+```cpp
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
 
+using std::cout;
+using std::endl;
 
+class Student
+{
+public:
+    Student(int id, const char *name)
+    : _id(id)
+    , _name(new char[strlen(name) + 1]())
+    {
+        cout << "构造函数" << endl;
+        strcpy(_name, name);
+    }
+    
+    void print() const
+    {
+        cout << "id = " << _id << endl
+             << "name = " << _name << endl;
+    }
 
+    void *operator new(size_t sz) //静态成员函数，无this指针
+    {
+        cout << "void *operator new(size_t)" << endl;
+        void *pret = malloc(sz);
+        return pret;
+    }
 
+    void operator delete(void *pret) //静态成员函数，无this指针 
+    {
+        cout << "void operator delete(void *)" << endl;
+        free(pret);
+    }
 
+    ~Student()
+    {
+        cout << "析构函数" << endl;
+        if(_name)
+        {
+            delete [] _name;
+            _name = nullptr;
+        }
+    }
 
+private:
+      int _id;
+      char *_name;
+};
 
+int main()
+{
+    Student *pstu = new Student(123, "xiaohong");
+    pstu->print();
+    //对象的销毁与析构函数的执行等价吗？
+    //不等价，对于堆对象而言，析构函数的执行只是对象销毁的一个步骤，还要执行delete操作
+    delete pstu;
+    return 0;
+}
+```
+## 要求一个类只能创建栈对象  
+StudentStack.cc  
+```cpp
+          Student stu(345, "xiaoming");
+       ✗  Student *pstu = new Student(123, "xiaohong");
+```
+方法：将operator new设置为私有  
+```cpp
+private:
+    void *operator new(size_t sz) //静态成员函数，无this指针
+    {
+        cout << "void *operator new(size_t)" << endl;
+        void *pret = malloc(sz);
+        return pret;
+    }
+```
+栈对象创建的条件是什么？  
+构造函数与析构函数都必须是public  
+## 要求一个类只能创建堆对象  
+StudentHeap.cc  
+```cpp
+      ✗   Student stu(345, "xiaoming");                                        
+          Student *pstu = new Student(123, "xiaohong");
+           
+      ✗  delete pstu; //但不能执行delete操作了
+```
+方法：将析构函数设置为私有，并添加destory函数解决不能delete问题  
+```cpp
+    void destroy()
+    {
+        delete this; //this指针指向对象本身
+    }
+private:
+    ~Student()
+    {
+        cout << "析构函数" << endl;
+        if(_name)
+        {
+            delete [] _name;
+            _name = nullptr;
+        }
+    }
+```
+delete表达式工作步骤举例：   
+执行析构函数从而释放“xiaoming"  
+执行delete从而释放pstu指向的堆对象  
+# 五、C++输入输出流  
+### 详见pdf  
+输入：文件 -> 内存    
+输出：内存 -> 文件  
+## C++常用流类型：  
+标准I/O：键盘显示器  
+文件I/O：磁盘文件  
+串I/O：内存中指定空间，通常用字符数组作为存储空间    
+StandrdIO.cc：  
+```cpp
+#include <iostream>
+#include <string>
+#include <limits>
 
+using std::cout;
+using std::endl;
+using std::cin;
+using std::string;
+using std::cerr;
 
+void printStreamStatus()
+{
+    cout << "cin.badbit = " << cin.bad() << endl
+         << "cin.failbit = " << cin.fail() << endl
+         << "cin.eofbit = " << cin.eof() << endl
+         << "cin.goodbit = " << cin.good() << endl;
+}
+
+void test()
+{
+    int number = 0;
+    printStreamStatus();
+    cin >> number;
+    printStreamStatus();
+    cin.clear(); //重置流的状态
+    //cin.ignore(1024, '\n'); //清空缓冲区
+    cout << endl;
+    printStreamStatus();
+    cout << "number = " << number << endl;
+    
+    string line;
+    cin >> line;
+    cout << "line = " << line << endl;
+}
+
+void test2()
+{
+    int number = 0;
+    cout << "Please input number: " << endl;
+    while(cin >> number, !cin.eof()) //逗号表达式
+    {
+        if(cin.bad())
+        {
+            cerr << "The stream is bad" << endl;            
+            return; //退出当前函数test2
+        }
+        else if(cin.fail())
+        {
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "Please input valid int number: " << endl;
+        }
+        else
+        {
+            cout << "number = " << number << endl;
+        }
+        //ctrl + d : 正常退出
+    }
+}
+
+int main()
+{
+    test2();
+    return 0;
+}
+```
+## 缓冲区  
+buffer.cc:  
+```cpp
+
+```
 
 
 
