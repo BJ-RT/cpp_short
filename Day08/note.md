@@ -239,6 +239,13 @@ delete表达式工作步骤举例：
 标准I/O：键盘显示器  
 文件I/O：磁盘文件  
 串I/O：内存中指定空间，通常用字符数组作为存储空间   
+### 流的状态：  
+```cpp
+badbit  bad()
+failbit fail()
+eofbit  eof()
+goodbit good()
+```
 ## 标准I/O
 StandrdIO.cc：  
 ```cpp
@@ -360,21 +367,4 @@ void test2()
     ifs.close();
 }
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
