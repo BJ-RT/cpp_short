@@ -238,7 +238,8 @@ delete表达式工作步骤举例：
 ## C++常用流类型：  
 标准I/O：键盘显示器  
 文件I/O：磁盘文件  
-串I/O：内存中指定空间，通常用字符数组作为存储空间    
+串I/O：内存中指定空间，通常用字符数组作为存储空间   
+## 标准I/O
 StandrdIO.cc：  
 ```cpp
 #include <iostream>
@@ -307,12 +308,58 @@ int main()
     return 0;
 }
 ```
-## 缓冲区  
+### 缓冲区  
 buffer.cc:  
 ```cpp
-
+    //cout << "123" << endl; //刷新缓冲区，并且换行
+    //cout << "123" << flush; //刷新缓冲区，但不换行
+    cout << "123" << ends; //不能换行与刷新缓冲区
+    sleep(5);
 ```
+隐式转换：  
+```cpp
+Point pt = 5; //这样赋值会发生隐式转换，调拥一次拷贝构造函数
+```
+## 文件I/O
+FileIO01.cc  
+```cpp
+void test()
+{
+    //默认情况下，对于文件输入流而言，当文件不存在的时候，就报错
+    ifstream ifs("Point1.cc");
+    if(!ifs.good())
+    {
+        cerr << "ifstream is not good" << endl;
+        return;
+    }
+        
+    string line;
+    while(ifs >> line) //while(ifs >> line, !ifs.eof())
+    {                  //对于文件输入流而言，默认以空格为分隔符
+        cout << line << endl;
+    }
 
+    ifs.close();
+}
+
+void test2()
+{
+    ifstream ifs("Point1.cc");
+    if(!ifs.good())
+    {
+        cerr << "ifstream is not good" << endl;
+        return;
+    }
+        
+    string line;
+    while(getline(ifs, line)) //按行读取 
+    {                  
+        cout << line << endl;
+    }
+
+    ifs.close();
+}
+```
 
 
 
