@@ -197,9 +197,85 @@ void test2()
     ofs.close();
 }
 ```
+## 串IO  
+tip: 委托构造函数    
+### 字符串输出流：  
+int型数据转化成string型数据：  
+StringStream.cc  
+```cpp
+#include <iostream>
+#include <sstream>
+#include <string>
 
+using std::cout;
+using std::endl;
+using std::ostringstream;
+using std::string;
 
+string IntToString(int number)
+{
+    ostringstream oss;
+    oss << number;
+    string str1 = oss.str();
+    return str1;
+}
 
+void test()
+{
+    string str1 = IntToString(10);
+    cout << "str1 = " << str1 << endl;
+}
 
+int main()
+{
+    test();
+    return 0;
+}
+```
+### 字符串输入输出流：  
+StringStream.cc  
+```cpp
+void test2()
+{
+    int number1 = 10;
+    int number2 = 20;
+    stringstream ss;
+    ss << "number1= " << number1 << " ,number2= " << number2 << endl;
+    string str1 = ss.str();
+    cout << str1;
 
+    string key;
+    int value;
+    while(ss >> key >> value)
+    {
+        cout << key << "  " << value << endl;
+    }
+}
 
+void readConfig(const string &filename)
+{
+    ifstream ifs(filename);
+    if(!ifs.good())
+    {
+        std::cerr << "ifstream is bad" << endl;
+        return;
+    }
+
+    string line;
+    while(getline(ifs, line))
+    {
+        string key;
+        string value;
+        istringstream iss(line);
+        iss >> key >> value;
+        cout << key << "    " << value << endl;
+    }
+
+    ifs.close();
+}
+
+void test3()
+{
+    readConfig("my.conf");
+}
+```
