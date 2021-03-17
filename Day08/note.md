@@ -177,7 +177,7 @@ private:
 
 int main()
 {
-    Student *pstu = new Student(123, "xiaohong");
+    Student *pstu = new Student(123, "xiaohong"); //为什么operator new函数是静态的？  因为执行new表达式的时候第一部就是执行operator new，此时还未创建对象，无this指针
     pstu->print();
     //对象的销毁与析构函数的执行等价吗？
     //不等价，对于堆对象而言，析构函数的执行只是对象销毁的一个步骤，还要执行delete操作
