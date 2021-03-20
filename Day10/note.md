@@ -369,6 +369,16 @@ class List
 ```
 详见视频  
 # 五、统计文章中的单词和词频  
+Dictionary.cc  
+# 六、日志系统  
+由于服务器没有交互界面，所以要用日志系统来记录动作    
+分为业务日志与系统日志  
+# 七、Log4cpp  
+github搜索：fffaraz/awesome-cpp -----> logging -----> Log4cpp  
+见思维导图和log4cpp安装文件和本节PDF  
+testLog4cpp.cc  
+
+
 
 
 
