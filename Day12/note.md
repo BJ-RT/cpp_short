@@ -41,6 +41,7 @@ private:
 # 内部类
 Point4.cc  
 # 单例模式的自动释放
+测试内存泄漏：valgrind  
 
 
 
