@@ -85,6 +85,9 @@ vim 操作：
 win拷贝到vim的方法：
   day08.1 43分
 
+批量更改：
+:75,90s/Base/Derived/g
+75-90行的Base换成Derived
 
 
 
