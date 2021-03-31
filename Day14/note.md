@@ -114,33 +114,17 @@ pair:
 ```
 map:  
 ```cpp
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //map的特点：
+    //1、key值必须唯一，不能有重复的key值(value值可以重复)
+    //2、默认情况下，按照key值的升序进行排列
+    //3、底层实现是一个红黑树
+    map<string, string> number = {
+        {"021", "上海"},
+        {"027", "武汉"},
+        {"010", "北京"},
+        std::pair<string, string>("030", "南京"),
+        std::pair<string, string>("010", "广州"),
+        std::pair<string, string>("075", "武汉")
+    };
+```
 
