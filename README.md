@@ -1,5 +1,5 @@
 ## C++课程向导  
-TIP：查看源码工具：Source Insight、SlickEditPro。《深入分析Linux内核源码 陈莉君》  
+TIP：查看源码工具：Source Insight、SlickEditPro。《深入分析Linux内核源码 陈莉君》。《你的灯亮着吗》、《暗时间》。  
 Day01: xshell操作，固定ip,linux命令，用户创建删除  
 Day02: linux目录文件命令，vim操作  
 Day03: linux命令复习，编译工具链，静态库与动态库  
