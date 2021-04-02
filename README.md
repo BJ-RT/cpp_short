@@ -26,7 +26,7 @@ Day23：C++基础的总结、面试亮点，面向对象设计概述、类与类
 Day24: 复习OOD、TextQuery作业详解1，TextQuery扩展作业详解2  
 Day25: 设计模式1，设计模式2，设计模式3，Linux多线程1线程的创建
 Day26:  
-Day27: 
+Day27:   
 Day28:  
 Day29:  
 Day30:  
