@@ -27,7 +27,7 @@ Day24: 复习OOD、TextQuery作业详解1，TextQuery扩展作业详解2
 Day25: 设计模式1，设计模式2，设计模式3，Linux多线程1线程的创建
 Day26:  
 Day27: 
-Day28: 
+Day28:  
 Day29:  
 Day30:  
 Day31:  
